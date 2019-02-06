@@ -1,0 +1,77 @@
+<p>
+  componente2 works!
+</p>
+<form>
+  <mat-form-field>
+    <input matInput placeholder="Nombre" [formControl]="nombreForm">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline" fxFlexFill>
+    <mat-label>Fecha Cumpleanios</mat-label>
+    <input matInput readonly [formControl]="dated" [matDatepicker]="fecha">
+    <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #fecha></mat-datepicker>
+  </mat-form-field>
+  <br>
+  <button mat-button (click)="consumoRest()">Consultar</button>
+  <button mat-button (click)="consumo2Rest()">Consultar 2</button>
+</form>
+
+<div *ngIf="mensaje!='' && dias!=''">
+  <label>{{mensaje}}, Faltan: {{dias}} dias para tu cumpleaños</label>
+    <table mat-table [dataSource]="datos">
+      <ng-container matColumnDef="Cuenta">
+        <th mat-header-cell *matHeaderCellDef>Cuenta</th>
+        <td mat-cell *matCellDef="let dato">{{dato.ccuenta}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Moneda">
+        <th mat-header-cell *matHeaderCellDef>Moneda</th>
+        <td mat-cell *matCellDef="let dato">{{dato.cmoneda}}</td>
+      </ng-container>
+      <ng-container matColumnDef="CProducto">
+        <th mat-header-cell *matHeaderCellDef>Cproducto</th>
+        <td mat-cell *matCellDef="let dato">{{dato.cproducto}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Desc Producto">
+        <th mat-header-cell *matHeaderCellDef>Desc Producto</th>
+        <td mat-cell *matCellDef="let dato">{{dato.dproducto}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Estado">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let dato">{{dato.estado}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Grupo">
+        <th mat-header-cell *matHeaderCellDef>Grupo</th>
+        <td mat-cell *matCellDef="let dato">{{dato.grupo}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Siglas">
+        <th mat-header-cell *matHeaderCellDef>Siglas</th>
+        <td mat-cell *matCellDef="let dato">{{dato.siglas}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Saldo Contable">
+        <th mat-header-cell *matHeaderCellDef>Saldo Contable</th>
+        <td mat-cell *matCellDef="let dato">{{dato.accounting}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Saldo Disponible">
+        <th mat-header-cell *matHeaderCellDef>Disponible</th>
+        <td mat-cell *matCellDef="let dato">{{dato.available}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Saldo Bloqueado">
+        <th mat-header-cell *matHeaderCellDef>Bloqueado</th>
+        <td mat-cell *matCellDef="let dato">{{dato.blocked}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Saldo Futuro">
+        <th mat-header-cell *matHeaderCellDef>Futuro</th>
+        <td mat-cell *matCellDef="let dato">{{dato.outstanding}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Subsistema">
+        <th mat-header-cell *matHeaderCellDef>Cuenta</th>
+        <td mat-cell *matCellDef="let dato">{{dato.ccuenta}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsAhorros"></tr>
+      <tr mat-row *matRowDef="let row; let even = even; let last = last; columns: displayedColumnsAhorros;" [ngClass]="{gray: even}"></tr>
+    </table>
+</div>
+
+
+  <a [routerLink]="['/']" >Atras</a>

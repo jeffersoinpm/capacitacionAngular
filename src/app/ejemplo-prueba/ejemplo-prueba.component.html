@@ -1,0 +1,47 @@
+<div>
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" [formControl]="nombre">
+      <mat-error *ngIf="nombre.hasError('required')">
+        El usuario es requerido
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" (click)="agregarId()">Agregar Nombre</button>
+    <br>
+    <mat-form-field>
+      <mat-select [formControl]="nombreSelected" (selectionChange)="mostrarTabla()">
+        <mat-option *ngFor="let persona of personas" [value]="persona.nombre">
+          {{persona.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Busqueda">
+    </mat-form-field>
+  </form>
+  <br>
+  <div>
+    <table mat-table [dataSource]="personasTabla">
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let dato">{{dato.nombre}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Hora">
+        <th mat-header-cell *matHeaderCellDef>Hora</th>
+        <td mat-cell *matCellDef="let dato">{{dato.hora}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Minuto">
+        <th mat-header-cell *matHeaderCellDef>Minuto</th>
+        <td mat-cell *matCellDef="let dato">{{dato.minuto}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Segundo">
+        <th mat-header-cell *matHeaderCellDef>Segundo</th>
+        <td mat-cell *matCellDef="let dato">{{dato.segundo}}</td>
+      </ng-container>
+      <tr mat-header-row class="mayt-header-row" *matHeaderRowDef="displayedColumnsIds"></tr>
+      <tr mat-row *matRowDef="let row; let even = even; let last = last; columns: displayedColumnsIds;"></tr>
+    </table>
+  </div>
+</div>
